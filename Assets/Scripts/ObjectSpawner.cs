@@ -7,10 +7,10 @@ using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using Google.XR.ARCoreExtensions;
-
+using UnityEngine.Networking;
 
 //[RequireComponent(typeof(ARAnchorManager))]
-public class ObjectSpawner : MonoBehaviour
+public class ObjectSpawner : NetworkBehaviour
 {
     //private ARAnchorManager anchorManager;
     // private Camera arcamera;
@@ -19,7 +19,7 @@ public class ObjectSpawner : MonoBehaviour
     //private ARRaycastManager rayManager;
     ARAnchorManager m_AnchorManager;
     private ARCloudAnchor _cloudAnchor;
-
+    public Button btnswitch;
     private int worked = 0;
     [SerializeField]
     private UnityEngine.UI.Button arWhite;
@@ -57,16 +57,22 @@ public class ObjectSpawner : MonoBehaviour
         debug3.text = "I was called";
     }
 
-
-
+    bool switchon = true;
+    //Text aButton = btnswitch.GetComponentInChildren<Text>().text;
     // Start is called before the first frame update
     public void ToggleState()
     {
         GetComponent<ObjectSpawner>().enabled = !GetComponent<ObjectSpawner>().enabled;
-    
+        switchon = !switchon;
+            if(switchon)
+           GameObject.Find("Placebutton").GetComponentInChildren<Text>().text = "Place ON";
+        else
+            GameObject.Find("Placebutton").GetComponentInChildren<Text>().text = "Place OFF";
+        // btnswitch.GetComponentInChildren<Text>().text = "Place /nON";
     }
     void Awake()
     {
+
         m_AnchorManager = GetComponent<ARAnchorManager>();
         placementIndicator = FindObjectOfType<PlacementIndicator>();
        
@@ -108,8 +114,8 @@ public class ObjectSpawner : MonoBehaviour
                 ARAnchor anchor = null;
                 //var anchor = m_AnchorManager.AddAnchor(new Pose(placementIndicator.transform.position, placementIndicator.transform.rotation));
                 GameObject obj = Instantiate(objectToSpawn, placementIndicator.transform.position, placementIndicator.transform.rotation);
-
-                anchor = obj.GetComponent<ARAnchor>();
+            NetworkServer.Spawn(obj);
+            anchor = obj.GetComponent<ARAnchor>();
                 if (anchor == null)
                 {
                     anchor = obj.AddComponent<ARAnchor>();

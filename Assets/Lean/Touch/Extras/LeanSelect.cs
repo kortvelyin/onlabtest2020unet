@@ -36,7 +36,16 @@ namespace Lean.Touch
 		[System.NonSerialized]
 		private LinkedListNode<LeanSelect> node;
 
-		protected override void TrySelect(LeanFinger finger, Component component, Vector3 worldPosition)
+/// <summary>
+/// /////////////////////////////////////////////////////////////////////////////////////
+/// </summary>
+        public void ToggleSelectState()
+        {
+            GetComponent<LeanSelect>().enabled = !GetComponent<LeanSelect>().enabled;
+
+        }
+
+        protected override void TrySelect(LeanFinger finger, Component component, Vector3 worldPosition)
 		{
 			// Stores the selectable we will search for
 			var selectable = default(LeanSelectable);

@@ -45,8 +45,14 @@ namespace Lean.Touch
 		/// Vector3 = Start point based on the ScreenDepth settings.</summary>
 		public Vector3Event OnWorld { get { if (onWorld == null) onWorld = new Vector3Event(); return onWorld; } } [FSA("onPosition")] [SerializeField] private Vector3Event onWorld;
 
+        public void ToggleLeanFingerTapState()
+        {
+            GetComponent<LeanFingerTap>().enabled = !GetComponent<LeanFingerTap>().enabled;
+
+        }
+
 #if UNITY_EDITOR
-		protected virtual void Reset()
+        protected virtual void Reset()
 		{
 			RequiredSelectable = GetComponentInParent<LeanSelectable>();
 		}
