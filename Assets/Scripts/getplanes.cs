@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 public class getplanes : MonoBehaviour
 {
+    ARPlaneManager m_ARPlaneManager;
     ARPlane planeNew;
     public Text debug;
     int idk;
@@ -22,6 +23,7 @@ public class getplanes : MonoBehaviour
     
     void Start()
     {
+        m_ARPlaneManager = GetComponent<ARPlaneManager>();
         var planeManager = GetComponent<ARPlaneManager>();
         foreach (ARPlane plane in planeManager.trackables)
         {
@@ -95,7 +97,9 @@ public class getplanes : MonoBehaviour
                 debug.text = vectors[1].ToString();
                 Debug.Log(vectors[1]);
                 isit = false;
-               // GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
+                m_ARPlaneManager.enabled = !m_ARPlaneManager.enabled;
+
+                //GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
             }
 
             if (planeNew == plane)
