@@ -8,6 +8,11 @@ using UnityEngine.UI;
 
 public class getplanes : MonoBehaviour
 {
+    public ARMeshManager m_MeshManager;
+    public MeshFilter m_NoneMeshPrefab;
+    public Material mat;
+    float width = 1;
+    float height = 1;
     ARPlaneManager m_ARPlaneManager;
     ARPlane planeNew;
     public Text debug;
@@ -23,6 +28,8 @@ public class getplanes : MonoBehaviour
     
     void Start()
     {
+        GetComponent<MeshFilter>().mesh = m_NoneMeshPrefab.mesh;
+        GetComponent<MeshRenderer>().material = mat;
         m_ARPlaneManager = GetComponent<ARPlaneManager>();
         var planeManager = GetComponent<ARPlaneManager>();
         foreach (ARPlane plane in planeManager.trackables)
@@ -68,6 +75,10 @@ public class getplanes : MonoBehaviour
             debug.text = "I'm working2";
             if (isit||plane!=null)
             {
+                
+                //Mesh mesh = new Mesh();
+                
+                Vector3[] vertices = new Vector3[3];
                 planeNew = plane;
                 // Do something with the ARPlane
                 //plane.alignment;
@@ -97,7 +108,20 @@ public class getplanes : MonoBehaviour
                 debug.text = vectors[1].ToString();
                 Debug.Log(vectors[1]);
                 isit = false;
-                m_ARPlaneManager.enabled = !m_ARPlaneManager.enabled;
+                // GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
+                /*vertices[0] = new Vector3(vectors[0].x, vectors[0].y);
+                vertices[1] = new Vector3(vectors[1].x, vectors[1].y);
+                vertices[2] = new Vector3(vectors[2].x, vectors[2].y);*/
+                if (vectors.Length > 2)
+                {
+                    vertices[0] = new Vector3(-width, -height);
+                    vertices[1] = new Vector3(width, -height);
+                    vertices[2] = new Vector3(-width, height);
+                    m_NoneMeshPrefab.mesh.vertices = vertices;
+                    m_NoneMeshPrefab.mesh.triangles = new int[] { 0, 2, 1 };
+
+                }
+                //m_ARPlaneManager.enabled = !m_ARPlaneManager.enabled;
 
                 //GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
             }
