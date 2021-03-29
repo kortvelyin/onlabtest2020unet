@@ -1,0 +1,192 @@
+
+
+
+/* vertices[0] = new Vector3(-5,1, -7);
+         vertices[1] = new Vector3(-2,2, 4);
+         vertices[2] = new Vector3(3,3, 6);
+         vertices[3] = new Vector3(2,4, -2);*/
+
+vertices[0] = new Vector3(-5, -7,1);
+         vertices[1] = new Vector3(-2, 4,2);
+         vertices[2] = new Vector3(3, 6,3);
+         vertices[3] = new Vector3(2, -2,4);
+         mesh.vertices = vertices;
+         mesh.triangles = new int[] { 0, 1, 2, 0, 2, 3 };*/
+		 
+ /*Quaternion rotation = new Quaternion(1, 0, 0, 1);
+            for (int r = 0; r < normals.Length; r++)
+            {normals[r] = rotation * normals[r]; 
+            }*/
+        /* Quaternion newRotation = new Quaternion(0,0,0,0);
+        // newRotation.eulerAngles = new Vector3(90, 0, 0);
+         Vector3 center = new Vector3(0, 0, 0);
+         for (int q = 0; q < 4; q++)
+         {//vertices being the array of vertices of your mesh
+             vertices[q] = newRotation * (vertices[q] - center) + center;
+         }*/
+		 
+		  //MeshFilter newMesh = Instantiate(meshFilterr);
+            // NetworkServer.Spawn(newMesh);
+           
+            //newMesh.mesh = mesh;
+            //newMesh.GetComponent<MeshRenderer>().material = mat;
+		 
+		 vertices[0] = new Vector3(-1, -1);
+            vertices[1] = new Vector3(-1, 1);
+            vertices[2] = new Vector3(1, 1);
+            vertices[3] = new Vector3(1, -1);
+			
+			 mesh.triangles = new int[] { 0, 1, 2, 0, 2, 3 };
+			 
+			 //meshFilterr.GetComponent<MeshFilter>().mesh = mesh;
+        //meshFilterr.GetComponent<MeshRenderer>().material = mat;
+        //meshFilterr.transform.rotation = rotation;
+		 /* MeshFilter newMesh = Instantiate(meshFilterr);
+         newMesh.GetComponent<MeshRenderer>().material = mat;
+         mesh = newMesh.GetComponent<MeshFilter>().mesh;
+		 
+		 
+			 
+			  /*mesh.RecalculateNormals();
+        Vector3[] normals = mesh.normals;
+        debug.text = normals[0].ToString();*/
+
+       
+        //Quaternion rotation = Quaternion.AngleAxis(Time.deltaTime * speed, Vector3.up);
+        
+ /*Mesh mesh = new Mesh();
+                vectors = plane.boundary;
+                Vector3[] vertices = new Vector3[3];
+               
+                mesh.vertices = vertices;
+                mesh.triangles = new int[] { 0, 2, 1 };
+                GetComponent<MeshFilter>().mesh = mesh;
+                GetComponent<MeshRenderer>().material = mat;*/
+                //Mesh mesh = new Mesh();
+
+ // GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
+               /* int i;
+                for (i=0; i < plane.boundary.Length; i++)
+                    {
+                        vertices[i] = new Vector3(vectors[i].x, vectors[i].y);
+                    }*/
+
+                
+               /* vertices[0] = new Vector3(vectors[0].x, vectors[0].y);
+                vertices[1] = new Vector3(vectors[1].x, vectors[1].y);
+                vertices[2] = new Vector3(vectors[2].x, vectors[2].y);*/
+              /*  vertices[0] = new Vector3(-width, -height);
+                vertices[1] = new Vector3(-width, height);
+                vertices[2] = new Vector3(width, height);
+                vertices[2] = new Vector3(width, -height);
+
+                /* vertices[0] = new Vector3(vectors[0].x, vectors[0].y);
+                     vertices[1] = new Vector3(vectors[1].x, vectors[1].y);
+                     vertices[2] = new Vector3(vectors[2].x, vectors[2].y);*/
+               // mesh.vertices = vertices;
+                //for (int z = 0; z < plane.boundary.Length; z++)
+                
+                    //i*3 db tag, 0 0+1 0+2 0 1+1 1+2
+                    /*    int[] tria = new int[i];
+                    for(int c=0; c< i-2; c++)
+                    {
+                        tria[3*c] = 0;
+                        tria[3*c + 1] = c + 1;
+                        tria[3*c + 2] = c + 2;
+                    }
+                    mesh.triangles = tria;*/
+                
+               //mesh.triangles = new int[] { 0, 1, 2, 0, 2, 3 };
+                // m_NoneMeshPrefab.mesh.vertices = vertices;
+                // m_NoneMeshPrefab.mesh.triangles = new int[] { 0, 2, 1 };
+
+                ///meshFilterr.mesh = mesh;
+               // meshFilterr.GetComponent<MeshRenderer>().material = mat;
+                //m_ARPlaneManager.enabled = !m_ARPlaneManager.enabled;
+               // GetComponent<MeshFilter>().mesh = mesh;
+               // GetComponent<MeshRenderer>().material = mat;
+                //GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
+
+        /*Mesh mesh = new Mesh();
+        Vector3[] vertices = new Vector3[11];*/
+			 
+			 
+		 
+		 Mesh mesh = new Mesh();
+            Vector3[] vertices = new Vector3[11];
+
+
+            GameObject newMeshF = Instantiate(meshF);
+			 mesh.vertices = vertices;
+			 
+			 mesh.RecalculateNormals();
+			 
+			 
+			  debug.text = mesh.normals[0].ToString();
+            newMeshF.GetComponent<MeshFilter>().mesh = mesh;
+            newMeshF.GetComponent<MeshRenderer>().material = mat;
+            Vector3[] normals = mesh.normals;
+            NetworkServer.Spawn(newMeshF);
+			
+			 mesh.normals = normals;
+			 
+			 
+			 
+			 for (int z = 0; z < 0; z++)
+        {
+            // debug.text = "I'm working1";
+            /*MeshFilter newMesh = Instantiate(meshFilterr);
+            newMesh.GetComponent<MeshRenderer>().material = mat;
+            mesh = newMesh.GetComponent<MeshFilter>().mesh;*/
+
+           /* Quaternion rot = new Quaternion(1, 0, 0, 1);
+            int i;
+            for (i = 0; i < 11; i++)
+            {
+                vertices[i] = new Vector3(pontok[i].x, pontok[i].y, z);
+            }
+
+            debug.text = vertices[0].ToString() + vertices[1].ToString() + vertices[2].ToString() + vertices[3].ToString();
+            */
+            /**/
+            //Quaternion newRotation = new Quaternion();
+           // newRotation.eulerAngles = new Vector3(90, 0, 0);
+           // Vector3 center = new Vector3(0, 0, 0);
+            for (int q = 0; q < 11; q++)
+            {//vertices being the array of vertices of your mesh
+               // vertices[q] = newRotation * (vertices[q] - center) + center;
+            }
+           /* mesh.vertices = vertices;
+            //mesh.triangles = new int[] { 0, 2, 3, 0, 1, 2, 0, 3, 4 };
+
+            //material = mat;
+            //plane.boundary points now 10
+            int[] tria = new int[3 * 10];
+            for (int c = 0; c < 9; c++)
+            {
+                tria[3 * c] = 0;
+                tria[3 * c + 1] = c + 1;
+                tria[3 * c + 2] = c + 2;
+            }
+            tria[(3 * 9)] = 0;
+            tria[(3 * 9) + 1] = 10;
+            tria[(3 * 9) + 2] = 1;
+            mesh.triangles = tria;*/
+
+            
+
+            /*Vector3[] normals = mesh.normals;
+            Quaternion rotation = Quaternion.AngleAxis(Time.deltaTime * speed, Vector3.up);
+            for (int r = 0; r < normals.Length; r++)
+            { normals[r] = rotation * normals[r]; }
+            mesh.normals = normals;/
+            /*Mesh zyzmesh = meshFilterr.GetComponent<MeshFilter>().sharedMesh;
+            Mesh mesh2 = Instantiate(zyzmesh);
+            mesh2 = mesh;
+            meshFilterr.GetComponent<MeshFilter>().sharedMesh = mesh2;*/
+            // meshFilterr.mesh = mesh;
+            // MeshFilter newMesh = Instantiate(meshFilterr);
+            // newMesh.mesh = mesh;
+            // newMesh.GetComponent<MeshRenderer>().material = mat;
+            //meshFilterr.GetComponent<MeshRenderer>().material = mat;
+        }

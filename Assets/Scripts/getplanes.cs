@@ -5,9 +5,12 @@ using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 public class getplanes : MonoBehaviour
 {
+    public GameObject meshF;
+    public ARPlaneManager planeManager;
     //public ARMeshManager m_MeshManager;
     public MeshFilter meshFilterr;
     public Material mat;
@@ -25,7 +28,7 @@ public class getplanes : MonoBehaviour
     List <Vector2> list;
     Unity.Collections.NativeArray<Vector2> vectors;
     Vector3[] pontok = new Vector3[11];
-
+    float speed = 100.0f;
     // Start is called before the first frame update
 
     void Start()
@@ -53,58 +56,35 @@ public class getplanes : MonoBehaviour
         pontok[10].x = 3;
         pontok[10].y = -6;
 
-        Quaternion rot;
-        Mesh mesh = new Mesh();
-        Vector3[] vertices = new Vector3[11];
-        for (int z = 0; z < 5; z++)
-        {
-            // debug.text = "I'm working1";
-            MeshFilter newMesh = Instantiate(meshFilterr);
-            newMesh.GetComponent<MeshRenderer>().material = mat;
-            mesh = newMesh.GetComponent<MeshFilter>().mesh;
 
+        
 
-            int i;
-            for (i = 0; i < 11; i++)
-            {
-                vertices[i] = new Vector3(pontok[i].x, pontok[i].y, z);
-            }
+        
+            
+            
+           
+            
 
-            debug.text = vertices[0].ToString() + vertices[1].ToString() + vertices[2].ToString() + vertices[3].ToString();
+            
 
-            /*vertices[0] = new Vector3(-width, -height);
-            vertices[1] = new Vector3(-width, height);
-            vertices[2] = new Vector3(width, height);
-            vertices[3] = new Vector3(width, -height);*/
-            mesh.vertices = vertices;
-            //mesh.triangles = new int[] { 0, 2, 3, 0, 1, 2, 0, 3, 4 };
+           
+           
 
-            //material = mat;
-            //plane.boundary points now 10
-            int[] tria = new int[3 * 10];
-            for (int c = 0; c < 9; c++)
-            {
-                tria[3 * c] = 0;
-                tria[3 * c + 1] = c + 1;
-                tria[3 * c + 2] = c + 2;
-            }
-            tria[(3 * 9)] = 0;
-            tria[(3 * 9) + 1] = 10;
-            tria[(3 * 9) + 2] = 1;
-            mesh.triangles = tria;
+            
 
+           
 
+           
 
-            /*Mesh zyzmesh = meshFilterr.GetComponent<MeshFilter>().sharedMesh;
-            Mesh mesh2 = Instantiate(zyzmesh);
-            mesh2 = mesh;
-            meshFilterr.GetComponent<MeshFilter>().sharedMesh = mesh2;*/
-            // meshFilterr.mesh = mesh;
-            // MeshFilter newMesh = Instantiate(meshFilterr);
-            // newMesh.mesh = mesh;
-            // newMesh.GetComponent<MeshRenderer>().material = mat;
-            //meshFilterr.GetComponent<MeshRenderer>().material = mat;
-        }
+           
+        
+        
+        
+       
+
+         
+
+        
         /*  var planeManager = GetComponent<ARPlaneManager>();
           foreach (ARPlane plane in planeManager.trackables)
           {
@@ -140,29 +120,19 @@ public class getplanes : MonoBehaviour
     }
 
     // Update is called once per frame
-
+    
     void Update()
     {
+
         Mesh mesh = new Mesh();
-        Vector3[] vertices = new Vector3[11];
+
         var planeManager = GetComponent<ARPlaneManager>();
-        
+
         foreach (ARPlane plane in planeManager.trackables)
         { 
             //debug.text = "I'm working2";
-            if (isit)
+            if (true)
             {
-               
-                /*Mesh mesh = new Mesh();
-                vectors = plane.boundary;
-                Vector3[] vertices = new Vector3[3];
-               
-                mesh.vertices = vertices;
-                mesh.triangles = new int[] { 0, 2, 1 };
-                GetComponent<MeshFilter>().mesh = mesh;
-                GetComponent<MeshRenderer>().material = mat;*/
-                //Mesh mesh = new Mesh();
-
                 //Vector3[] vertices = new Vector3[3];
                 planeNew = plane;
                 // Do something with the ARPlane
@@ -190,51 +160,38 @@ public class getplanes : MonoBehaviour
                 vectors = plane.boundary;
                 Debug.Log(vectors[1]);
                 //isit = false;
-                debug.text = vectors[0].ToString()+ vectors[1].ToString()+ vectors[2].ToString()+ plane.boundary.Length.ToString();
+                debug.text = vectors[0].ToString()+ vectors[1].ToString()+ vectors[2].ToString()+ plane.boundary.Length.ToString()+"center"+plane.center.ToString()+"position"+plane.transform.position.ToString()+"rotation"+plane.transform.rotation;
                 Debug.Log(vectors[1]);
                 isit = false;
-                // GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
-               /* int i;
-                for (i=0; i < plane.boundary.Length; i++)
-                    {
-                        vertices[i] = new Vector3(vectors[i].x, vectors[i].y);
-                    }*/
+                Vector3[] vertices = new Vector3[plane.boundary.Length];
+                //position és rotation miatt jobb ha gameobject
 
-                
-               /* vertices[0] = new Vector3(vectors[0].x, vectors[0].y);
-                vertices[1] = new Vector3(vectors[1].x, vectors[1].y);
-                vertices[2] = new Vector3(vectors[2].x, vectors[2].y);*/
-                vertices[0] = new Vector3(-width, -height);
-                vertices[1] = new Vector3(-width, height);
-                vertices[2] = new Vector3(width, height);
-                vertices[2] = new Vector3(width, -height);
-
-                /* vertices[0] = new Vector3(vectors[0].x, vectors[0].y);
-                     vertices[1] = new Vector3(vectors[1].x, vectors[1].y);
-                     vertices[2] = new Vector3(vectors[2].x, vectors[2].y);*/
+                GameObject newMeshF = Instantiate(meshF);
+               
+                int i;
+                for (i = 0; i < plane.boundary.Length; i++)
+                {
+                    vertices[i] = new Vector3(vectors[i].x,0, vectors[i].y);
+                }
                 mesh.vertices = vertices;
-                //for (int z = 0; z < plane.boundary.Length; z++)
-                
-                    //i*3 db tag, 0 0+1 0+2 0 1+1 1+2
-                    /*    int[] tria = new int[i];
-                    for(int c=0; c< i-2; c++)
-                    {
-                        tria[3*c] = 0;
-                        tria[3*c + 1] = c + 1;
-                        tria[3*c + 2] = c + 2;
-                    }
-                    mesh.triangles = tria;*/
-                
-               mesh.triangles = new int[] { 0, 1, 2, 0, 2, 3 };
-                // m_NoneMeshPrefab.mesh.vertices = vertices;
-                // m_NoneMeshPrefab.mesh.triangles = new int[] { 0, 2, 1 };
 
-                meshFilterr.mesh = mesh;
-               // meshFilterr.GetComponent<MeshRenderer>().material = mat;
-                //m_ARPlaneManager.enabled = !m_ARPlaneManager.enabled;
-               // GetComponent<MeshFilter>().mesh = mesh;
-               // GetComponent<MeshRenderer>().material = mat;
-                //GetComponent<ARPlaneManager>().enabled = !GetComponent<ARPlaneManager>().enabled;
+                int[] tria = new int[3 *( plane.boundary.Length-2)];
+                for (int c = 0; c < plane.boundary.Length - 2; c++)
+                {
+                    tria[3 * c] = 0;
+                    tria[3 * c + 1] = c + 1;
+                    tria[3 * c + 2] = c + 2;
+                }
+                /*tria[(3 * 9)] = 0;
+                tria[(3 * 9) + 1] = 10;
+                tria[(3 * 9) + 2] = 1;*/
+                mesh.triangles = tria;
+                mesh.RecalculateNormals();
+                newMeshF.GetComponent<MeshFilter>().mesh = mesh;
+                newMeshF.GetComponent<MeshRenderer>().material = mat;
+                newMeshF.transform.position = plane.transform.position;
+                newMeshF.transform.rotation = plane.transform.rotation;
+                isit = false;
             }
 
            // if (planeNew == plane)
