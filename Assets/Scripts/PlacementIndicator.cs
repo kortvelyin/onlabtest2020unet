@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using UnityEngine.Networking;
 
-public class PlacementIndicator : MonoBehaviour
+public class PlacementIndicator : NetworkBehaviour
 {
     private ARRaycastManager rayManager;
     private GameObject visual;

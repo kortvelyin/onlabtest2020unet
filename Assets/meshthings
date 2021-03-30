@@ -129,8 +129,12 @@ vertices[0] = new Vector3(-5, -7,1);
             NetworkServer.Spawn(newMeshF);
 			
 			 mesh.normals = normals;
-			 
-			 
+			 /////////////////
+			 GameObject newMeshF = Instantiate(meshF);
+			 newMeshF.GetComponent<MeshRenderer>().material = mat;
+			 mesh.RecalculateNormals();
+                     newMeshF.GetComponent<MeshFilter>().mesh = mesh;
+					  NetworkServer.Spawn(newMeshF);
 			 
 			 for (int z = 0; z < 0; z++)
         {
