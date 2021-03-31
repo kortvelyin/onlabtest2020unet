@@ -115,11 +115,12 @@ public class getplanes : NetworkBehaviour
 
             foreach (ARPlane plane in planeManager.trackables)
             {
-                debug.text = "in planemanager";
+                //debug.text = "in planemanager";
                 //debug.text = "I'm working2";
-                if (false)
+                if (isit)
                 {
-                    Mesh mesh = new Mesh();
+                debug.text = "In isit";
+                Mesh mesh = new Mesh();
                     //Vector3[] vertices = new Vector3[3];
                     planeNew = plane;
                     // Do something with the ARPlane
@@ -157,7 +158,7 @@ public class getplanes : NetworkBehaviour
                     {
                         vertices[i] = new Vector3(vectors[i].x, 0, vectors[i].y);
                     }
-                    //RpcFromPlane(plane, mesh);
+                    //RpcFromPlane(plane, mesh,);
 
                     //newMeshF.GetComponent<MeshRenderer>().material = mat;
 
@@ -168,32 +169,35 @@ public class getplanes : NetworkBehaviour
                         tria[3 * c + 1] = c + 1;
                         tria[3 * c + 2] = c + 2;
                     }
-                    //CmdCreatePlanefromplane(vertices, tria, plane.boundary.Length, plane.transform.position, plane.transform.rotation);
-                    /*mesh.vertices = vertices;
+                Rpcmeshextra(vertices, tria, plane.transform.position, plane.transform.rotation);
+                //CmdCreatePlanefromplane(vertices, tria, plane.boundary.Length, plane.transform.position, plane.transform.rotation);
+               // RpcCreatePlanefromplane(vertices, tria, plane.transform.position, plane.transform.rotation);
+                //CreatePlane(vertices, tria, plane.transform.position, plane.transform.rotation);
+                /*mesh.vertices = vertices;
+                
+            
+                mesh.triangles = tria;
+                mesh.RecalculateNormals();
+                newMeshF.GetComponent<MeshFilter>().mesh = mesh;
+                //newMeshF.GetComponent<MeshRenderer>().material = mat;
+                newMeshF.transform.position = plane.transform.position;
+                newMeshF.transform.rotation = plane.transform.rotation;
+                NetworkServer.Spawn(newMeshF);*/
+                //position és rotation miatt jobb ha gameobject
 
+                //RpcCreatePlane(vertices, tria, plane.boundary.Length, newMeshF, plane.transform.position, plane.transform.rotation);
+                //neMeshF.GetComponent<MeshRenderer>().material = mat;
+                /*tria[(3 * 9)] = 0;
+                tria[(3 * 9) + 1] = 10;
+                tria[(3 * 9) + 2] = 1;*/
+            }
 
-                    mesh.triangles = tria;
-                    mesh.RecalculateNormals();
-                    newMeshF.GetComponent<MeshFilter>().mesh = mesh;
-                    //newMeshF.GetComponent<MeshRenderer>().material = mat;
-                    newMeshF.transform.position = plane.transform.position;
-                    newMeshF.transform.rotation = plane.transform.rotation;
-                    NetworkServer.Spawn(newMeshF);*/
-                    //position és rotation miatt jobb ha gameobject
-                    debug.text = "I'm alive2";
-                    //RpcCreatePlane(vertices, tria, plane.boundary.Length, newMeshF, plane.transform.position, plane.transform.rotation);
-                    //neMeshF.GetComponent<MeshRenderer>().material = mat;
-                    /*tria[(3 * 9)] = 0;
-                    tria[(3 * 9) + 1] = 10;
-                    tria[(3 * 9) + 2] = 1;*/
-                }
-                //isit = false;
-                //  }
+            //  }
 
-                // if (planeNew == plane)
-                // debug.text = "I'm alive";
-                // Do something with the ARPlane
-            }      // }
+            // if (planeNew == plane)
+            // debug.text = "I'm alive";
+            // Do something with the ARPlane
+        }      // }
             //}
       //  }
     }
@@ -226,7 +230,7 @@ public class getplanes : NetworkBehaviour
           newMeshF.transform.rotation = plane.transform.rotation;
       }*/
 
-   [ClientRpc]
+  /* [ClientRpc]
     public void RpcCreatePlane(Vector3[] vertices, int[] tria, int planeBoundaryLength, GameObject newMeshF, Vector3 position, Quaternion rotation)
     {
        
@@ -244,19 +248,21 @@ public class getplanes : NetworkBehaviour
 
 
         //debug.text = vertices[0].ToString() + vertices[1].ToString() + vertices[2].ToString() + planeBoundaryLength.ToString() + "position" + position.ToString() + "rotation" + rotation.ToString();
-    }
+    }*/
 
-    [Command]
+    /*[Command]
     public void CmdCreatePlanefromplane(Vector3[] vertices, int[] tria, int planeBoundaryLength, Vector3 position, Quaternion rotation)
     {
         //CreatePlane(vertices, tria, planeBoundaryLength, position, rotation);
-    }
-    [ClientRpc]
-    public void RpcCreatePlanefromplane(Vector3[] vertices, int[] tria, int planeBoundaryLength, Vector3 position, Quaternion rotation)
+    }*/
+
+    /*[ClientRpc]
+    public void RpcCreatePlanefromplane(Vector3[] vertices, int[] tria,  Vector3 position, Quaternion rotation)
     {
-        CreatePlane(vertices,tria,  planeBoundaryLength, position, rotation);
-    }
-    public void CreatePlane(Vector3[] vertices, int[] tria, int planeBoundaryLength, Vector3 position, Quaternion rotation)
+        CreatePlane(vertices,tria, position, rotation);
+    }*/
+
+    public void CreatePlane(Vector3[] vertices, int[] tria,Vector3 position, Quaternion rotation)
     {
         GameObject newMeshF = Instantiate(meshF);
         Mesh mesh = new Mesh();
@@ -272,7 +278,7 @@ public class getplanes : NetworkBehaviour
         newMeshF.transform.rotation = rotation;
 
 
-        debug.text = "in create plane"+vertices[0].ToString() + vertices[1].ToString() + vertices[2].ToString() + planeBoundaryLength.ToString() + "position" + position.ToString() + "rotation" + rotation.ToString();
+        debug.text = "in create plane"+vertices[0].ToString() + vertices[1].ToString() + vertices[2].ToString()+ "position" + position.ToString() + "rotation" + rotation.ToString();
     }
 
     public void MakeMesh()
@@ -333,12 +339,14 @@ public class getplanes : NetworkBehaviour
           debug.text = "Cmd";
           MakeMesh();
       }*/
-    [ClientRpc]
-    public void Rpcmeshextra(Vector3[] vertices, int[] tria)
+   [ClientRpc]
+    public void Rpcmeshextra(Vector3[] vertices, int[] tria, Vector3 position, Quaternion rotation)
     {
-       
+        //isit = false;
         debug.text = "Rpc2";
-        MakeMeshextra(vertices,tria);
+        // MakeMesh();
+        CreatePlane(vertices, tria, position, rotation);
+        //MakeMeshextra(vertices,tria);
     }
 
     [ClientRpc]
