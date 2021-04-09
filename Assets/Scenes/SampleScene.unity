@@ -735,7 +735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6542213424532297841, guid: 51c7a2f0ae081764890d74e64d204b1f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 214.5
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6542213424532297841, guid: 51c7a2f0ae081764890d74e64d204b1f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1066,7 +1066,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 422468303152704479, guid: a5df2d64732935447bb13e2233b15e9a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 576714801614718121, guid: a5df2d64732935447bb13e2233b15e9a, type: 3}
       propertyPath: m_LocalScale.x
@@ -3633,7 +3633,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4310624268177856322, guid: dc4f686be3eb0994aadf140cd9a3e8c4, type: 3}
       propertyPath: m_TransformSyncMode
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 703205516183378346, guid: dc4f686be3eb0994aadf140cd9a3e8c4, type: 3}

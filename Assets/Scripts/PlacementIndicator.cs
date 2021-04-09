@@ -5,7 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.Networking;
 
-public class PlacementIndicator : NetworkBehaviour
+public class PlacementIndicator : MonoBehaviour
 {
     private ARRaycastManager rayManager;
     private GameObject visual;
