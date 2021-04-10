@@ -194,12 +194,14 @@ public class getplanes : NetworkBehaviour
                     
                     Vector3[] vertices = new Vector3[plane.boundary.Length];
                     int i;
-                    for (i = 0; i < plane.boundary.Length; i++)
-                    {
-                        vertices[i] = new Vector3(vectors[i].x, 0, vectors[i].y);
-                    }
+                for (i = 0; i < plane.boundary.Length; i++)
+                {
+                    vertices[i] = new Vector3(vectors[i].x, 0, vectors[i].y);
+                }
+
+                Rpcmeshextra(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length);
                 //RpcFromPlane(plane, mesh,);
-                CmdDoSomelvnevnlv(plane.transform.position, vertices);
+                // CmdDoSomelvnevnlv(plane.transform.position, vertices);
                 //newMeshF.GetComponent<MeshRenderer>().material = mat;
 
                 /* int[] tria = new int[3 * (plane.boundary.Length - 2)];
