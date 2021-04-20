@@ -54,6 +54,9 @@ public class getplanes : NetworkBehaviour
         ownID = PlayerId;
         Debug.Log(PlayerId);
 
+
+       
+
         //////ha esetleg kéne egy plane kód kipróbálásra
         pontok[0].x = 0;
         pontok[0].y = 0;
@@ -83,18 +86,22 @@ public class getplanes : NetworkBehaviour
 
     }
 
+    void OnStartLocalPlayer() { Debug.Log("Hello"); }
+    bool once = true;
 
-   
     void Update()
     {
 
-
+        // if (!isLocalPlayer) return;
+    
+                // if (!isLocalPlayer) return;
+        if (!hasAuthority) return;
         ///////////////////////////////////////////////////////////////////////////////////////////
         var planeManager = GetComponent<ARPlaneManager>();
-
+           
         foreach (ARPlane plane in planeManager.trackables)
         {
-
+            //debug.text = "in plane";
             /////////////Milyen adatokkal rendeklezik a plane, ha esetleg kéne egyszer
             planeNew = plane;
             smt = plane.transform.localPosition;
@@ -143,13 +150,13 @@ public class getplanes : NetworkBehaviour
 
 
             ///Ez a kettõ amit próbáltam
-            newMeshFF.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
+            //newMeshFF.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
             //newMeshFF.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
 
 
-            // CreatePlane(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length);
-            if (!isLocalPlayer) return;
-            CmdDoSomelvnevnlv(newMeshFF, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length, playerNetID);
+            //CreatePlane(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length, playerNetID);
+
+          //  CmdDoSomelvnevnlv(newMeshFF, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length, playerNetID);
             Destroy(newMeshFF);//Mert csak info továbbításra van
 
             //Rpcmeshextra(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length);
@@ -170,7 +177,7 @@ public class getplanes : NetworkBehaviour
 
 
 
-
+    
 
 
     /// A függvény ami kezeli a kilensen a mesh létrehozást
@@ -342,7 +349,7 @@ public class getplanes : NetworkBehaviour
     [ClientRpc]//Mit csinál az RPC hívással
     public void Rpcmesh()
     {
-        
+        once = false;
         debug.text = "Rpc";
         MakeMesh();
     }
@@ -351,4 +358,11 @@ public class getplanes : NetworkBehaviour
     {
         PlayerId++;
     }
+
+    [Command]//Még nincs playerID
+    public void CmdTryingToCallCommand()
+    {
+        Rpcmesh();
+    }
+
 }
