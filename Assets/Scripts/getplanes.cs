@@ -19,7 +19,8 @@ public class getplanes : NetworkBehaviour
     //[SyncVar]
     //public int[] tria;
     public GameObject Cube;
-    public GameObject meshF;
+    
+     public GameObject meshF;
     public ARPlaneManager planeManager;
     //public ARMeshManager m_MeshManager;
     public MeshFilter meshFilterr;
@@ -37,7 +38,7 @@ public class getplanes : NetworkBehaviour
     Vector2[] smt2;
     List<Vector2> list;
     Unity.Collections.NativeArray<Vector2> vectors;
-
+    PlayerObject playerobjscript;
     Vector3[] pontok = new Vector3[11];
     float speed = 100.0f;
     // Start is called before the first frame update
@@ -55,7 +56,7 @@ public class getplanes : NetworkBehaviour
         Debug.Log(PlayerId);
 
 
-       
+        playerobjscript = FindObjectOfType<PlayerObject>();
 
         //////ha esetleg kéne egy plane kód kipróbálásra
         pontok[0].x = 0;
@@ -91,83 +92,84 @@ public class getplanes : NetworkBehaviour
 
     void Update()
     {
+        /* Mesh mesh = new Mesh();
+         mesh.vertices = pontok;
+         mesh.RecalculateNormals();
+
+         meshF.GetComponent<MeshFilter>().mesh = mesh;
+         PlayerObject.PlayerObjectsmeshF = meshF;
+         PlayerObject.theMeshIsChanged = true;*/
+        
+
+        /*if (isServer)
+        {
+            return;
+        }*/
+        if (false)
+        {
+            //CmdTryingToCallCommand();
+            PlayerObject.POid = 2;
+            PlayerObject.theMeshIsChanged = true;
+            once = false;
+        }
+        // if (!isLocalPlayer) return;
 
         // if (!isLocalPlayer) return;
-    
-                // if (!isLocalPlayer) return;
         if (!hasAuthority) return;
         ///////////////////////////////////////////////////////////////////////////////////////////
         var planeManager = GetComponent<ARPlaneManager>();
            
         foreach (ARPlane plane in planeManager.trackables)
         {
-            //debug.text = "in plane";
-            /////////////Milyen adatokkal rendeklezik a plane, ha esetleg kéne egyszer
-            planeNew = plane;
-            smt = plane.transform.localPosition;
-            identity = plane.transform.localRotation;
-            smt = plane.transform.localScale;
-            smt = plane.transform.position;
-            identity = plane.transform.rotation;
-            plane.GetInstanceID();
-            vectors = plane.boundary;
-
-            //debug.text = vectors[0].ToString()+ vectors[1].ToString()+ vectors[2].ToString()+ plane.boundary.Length.ToString()+"center"+plane.center.ToString()+"position"+plane.transform.position.ToString()+"rotation"+plane.transform.rotation;
-            
-            //////Létrehozom a GameObjectet amibe berakok mindent amit nem tudok máshogy átküldeni
-            GameObject newMeshFF = Instantiate(meshF);
-            Mesh mesh = new Mesh();
-            //CmdDoSomelvnevnlv(plane.transform.position, newMeshFF);
-
-           /* float[] boundaryX = new float[plane.boundary.Length];
-            float[] boundaryY = new float[plane.boundary.Length];
-            int p;
-            for (p = 0; p < plane.boundary.Length; p++)
+            if (once)
             {
-                boundaryX[p] = vectors[p].x;
-                boundaryY[p] = vectors[p].y;
-            }
-            */
-            Vector3[] vertices = new Vector3[plane.boundary.Length];
-            int i;
+                //debug.text = "in plane";
+                /////////////Milyen adatokkal rendeklezik a plane, ha esetleg kéne egyszer
+                planeNew = plane;
+                smt = plane.transform.localPosition;
+                identity = plane.transform.localRotation;
+                smt = plane.transform.localScale;
+                smt = plane.transform.position;
+                identity = plane.transform.rotation;
+                plane.GetInstanceID();
+                vectors = plane.boundary;
+
+                //debug.text = vectors[0].ToString()+ vectors[1].ToString()+ vectors[2].ToString()+ plane.boundary.Length.ToString()+"center"+plane.center.ToString()+"position"+plane.transform.position.ToString()+"rotation"+plane.transform.rotation;
+
+                //////Létrehozom a GameObjectet amibe berakok mindent amit nem tudok máshogy átküldeni
+                GameObject newMeshFF = Instantiate(meshF);
+                Mesh mesh = new Mesh();
+                
+                Vector3[] vertices = new Vector3[plane.boundary.Length];
+                int i;
                 for (i = 0; i < plane.boundary.Length; i++)
-                    {
-                        vertices[i] = new Vector3(vectors[i].x, 0, vectors[i].y);
-                    }
+                {
+                    vertices[i] = new Vector3(vectors[i].x, 0, vectors[i].y);
+                }
 
-            /*int[] tria = new int[3 * (plane.boundary.Length - 2)];
-                for (int c = 0; c < plane.boundary.Length - 2; c++)
-                    {
-                        tria[3 * c] = 0;
-                        tria[3 * c + 1] = c + 1;
-                        tria[3 * c + 2] = c + 2;
-                    }
-            mesh.vertices = vertices;
-            mesh.triangles = tria;*/
-            mesh.vertices = vertices;
-            mesh.RecalculateNormals();
-            newMeshFF.GetComponent<MeshFilter>().mesh = mesh;
+                
+                mesh.vertices = vertices;
+                mesh.RecalculateNormals();
+                newMeshFF.GetComponent<MeshFilter>().mesh = mesh;
 
 
-            ///Ez a kettõ amit próbáltam
-            //newMeshFF.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
-            //newMeshFF.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+                ///Ez a kettõ amit próbáltam
+                //newMeshFF.GetComponent<NetworkIdentity>().AssignClientAuthority(this.GetComponent<NetworkIdentity>().connectionToClient);
+                //newMeshFF.GetComponent<NetworkIdentity>().AssignClientAuthority(connectionToClient);
+               /* PlayerObject.PlayerObjectsmeshF = newMeshFF;
+                PlayerObject.POposition = plane.transform.position;
+                PlayerObject.POrotation = plane.transform.rotation;
+                PlayerObject.POid = plane.GetInstanceID();
+                PlayerObject.POboundarylength = plane.boundary.Length;*/
+                //PlayerObject.theMeshIsChanged = true;
 
+                CreatePlane(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length, playerNetID);
 
-            //CreatePlane(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length, playerNetID);
+                //ANormalFunctionToCallCmdDoSomelvnevnlv(newMeshFF, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length, playerNetID);
+                Destroy(newMeshFF);//Mert csak info továbbításra volt
 
-          //  CmdDoSomelvnevnlv(newMeshFF, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length, playerNetID);
-            Destroy(newMeshFF);//Mert csak info továbbításra van
-
-            //Rpcmeshextra(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length);
-            // Rpcmeshextra(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length);
-            //CmdsrvrmeshToPlane(boundaryX, boundaryY, plane.transform.position, plane.transform.rotation, plane.GetInstanceID() , plane.boundary.Length);
-
-            //Rpcmeshextra(vertices, plane.transform.position, plane.transform.rotation, plane.GetInstanceID(), plane.boundary.Length);
-            //RpcFromPlane(plane, mesh,);
-            // CmdDoSomelvnevnlv(plane.transform.position, vertices);
-            //newMeshF.GetComponent<MeshRenderer>().material = mat;
-
+               
+            }
 
 
 
@@ -284,7 +286,10 @@ public class getplanes : NetworkBehaviour
           Rpcmeshextra(vertices, position, rotation, id, boundarylength);
       }
       */
-
+    public void ANormalFunctionToCallCmdDoSomelvnevnlv(GameObject meshprefab, Vector3 position, Quaternion rotation, int id, int boundarylength, NetworkInstanceId playerNetID)
+    {
+        CmdDoSomelvnevnlv( meshprefab,  position,  rotation, id,  boundarylength, playerNetID);
+    }
 
     [Command] //Serverre küldi a Plane adatokat
     public void CmdDoSomelvnevnlv(GameObject meshprefab, Vector3 position, Quaternion rotation, int id, int boundarylength, NetworkInstanceId playerNetID)
@@ -332,6 +337,10 @@ public class getplanes : NetworkBehaviour
 
          //debug.text = "in create plane" + vertices[0].ToString() + vertices[1].ToString() + vertices[2].ToString() + "position" + position.ToString() + "rotation" + rotation.ToString();
      }*/
+
+
+
+
     [ClientRpc]//Plane adatból állítja elõ a mesh-t
     void Rpcmeshextra(Vector3[] vertices, Vector3 position, Quaternion rotation, int id, int boundarylength, NetworkInstanceId playerNetID)
     {
@@ -351,7 +360,8 @@ public class getplanes : NetworkBehaviour
     {
         once = false;
         debug.text = "Rpc";
-        MakeMesh();
+        Debug.Log("i can call it from getplanes and also I come from the cmd");
+        //MakeMesh();
     }
     [Command]//Még nincs playerID
     public void Cmdplayerplus()
@@ -359,10 +369,13 @@ public class getplanes : NetworkBehaviour
         PlayerId++;
     }
 
-    [Command]//Még nincs playerID
-    public void CmdTryingToCallCommand()
+    [Command]//Próbálom máshonnan meghívni a lényeget, azaz hogy az átadott gameobjectet megtudja hívni és hogy hozzáfér-e
+    public void CmdTryingToCallCommand(GameObject Meshf)
     {
-        Rpcmesh();
+        Vector3[] verticess = new Vector3[3];
+        verticess = Meshf.GetComponent<MeshFilter>().mesh.vertices;
+        Debug.Log("in the thing where you try to access the gameobject");
+       Rpcmesh();
     }
 
 }
