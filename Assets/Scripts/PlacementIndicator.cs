@@ -27,10 +27,12 @@ public class PlacementIndicator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_ANDROID
         //shoot a raycast from the center of the screen
         List<ARRaycastHit> hits = new List<ARRaycastHit>();
+        
         rayManager.Raycast(new Vector2(Screen.width / 2, Screen.height / 3), hits, TrackableType.Planes);
-
+#endif
         //if we hit a ARplane, update the position and rotation
         if (hits.Count > 0)
         {

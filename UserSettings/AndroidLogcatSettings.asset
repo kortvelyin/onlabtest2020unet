@@ -1,0 +1,161 @@
+{
+    "m_SelectedDeviceId": "ce03182345bb6e24017e",
+    "m_SelectedPackage": {
+        "deviceId": "ce03182345bb6e24017e",
+        "name": "com.DefaultCompany.onlabtest2020",
+        "processId": 17237,
+        "exited": false
+    },
+    "m_SelectedPriority": 0,
+    "m_KnownPackagesForSerialization": [
+        {
+            "deviceId": "HYFDU18C14015378",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 24065,
+            "exited": true
+        },
+        {
+            "deviceId": "HYFDU18C14015378",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 25968,
+            "exited": true
+        },
+        {
+            "deviceId": "HYFDU18C14015378",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 26834,
+            "exited": true
+        },
+        {
+            "deviceId": "HYFDU18C14015378",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 31152,
+            "exited": true
+        },
+        {
+            "deviceId": "HYFDU18C14015378",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 1820,
+            "exited": true
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 22674,
+            "exited": true
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 22897,
+            "exited": true
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.android.settings",
+            "processId": 22716,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 31282,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 6918,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 27809,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 1710,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 6044,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 11670,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 14240,
+            "exited": false
+        },
+        {
+            "deviceId": "ce03182345bb6e24017e",
+            "name": "com.DefaultCompany.onlabtest2020",
+            "processId": 17237,
+            "exited": false
+        }
+    ],
+    "m_Tags": {
+        "m_Entries": [
+            {
+                "m_Name": "Filter by all listed tags",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "No Filter",
+                "m_Selected": true
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Tag Control...",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "Unity",
+                "m_Selected": false
+            },
+            {
+                "m_Name": "CRASH",
+                "m_Selected": false
+            }
+        ]
+    },
+    "m_MemoryViewerState": {
+        "MemoryWindowHeight": 255.0,
+        "MemoryWindowWidth": 170.0,
+        "MemoryTypeEnabled": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+        ],
+        "MemoryGroup": 2,
+        "Behavior": 1
+    },
+    "m_Filter": "unity",
+    "m_FilterIsRegularExpression": true,
+    "m_SymbolPaths": []
+}

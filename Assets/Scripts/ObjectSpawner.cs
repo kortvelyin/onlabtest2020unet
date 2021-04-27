@@ -7,10 +7,11 @@ using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using Google.XR.ARCoreExtensions;
+using UnityEngine.Networking;
 
 
 //[RequireComponent(typeof(ARAnchorManager))]
-public class ObjectSpawner : MonoBehaviour
+public class ObjectSpawner : NetworkBehaviour
 {
     //private ARAnchorManager anchorManager;
     // private Camera arcamera;
@@ -108,7 +109,7 @@ public class ObjectSpawner : MonoBehaviour
                 ARAnchor anchor = null;
                 //var anchor = m_AnchorManager.AddAnchor(new Pose(placementIndicator.transform.position, placementIndicator.transform.rotation));
                 GameObject obj = Instantiate(objectToSpawn, placementIndicator.transform.position, placementIndicator.transform.rotation);
-
+            NetworkServer.Spawn(obj);
                 anchor = obj.GetComponent<ARAnchor>();
                 if (anchor == null)
                 {
@@ -150,7 +151,7 @@ public class ObjectSpawner : MonoBehaviour
                     // Wait, not ready yet.
                     debug1.text = "eh";
                     thing++;
-                    if (thing == 50) ;
+                    if (thing == 50) 
                     debug1.text = "eeeeeeh";
                 }
                 else
